@@ -4,13 +4,14 @@ import calculator.Utility;
 import camp.nextstep.edu.missionutils.Console;
 
 public class inputView {
-    public static void inputString() {
+    public static String[] inputString() {
         String str = Console.readLine();
         validateCustomSeperator(str);
         String seperatorRegex = Utility.findCustomSeperator(str);
         str = Utility.makeTargetString(str);
         String[] tokens = str.split(seperatorRegex);
         validateNumber(tokens);
+        return tokens;
     }
 
     public static void validateCustomSeperator(String str){
