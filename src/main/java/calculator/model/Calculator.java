@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.Validator;
+import calculator.Utility;
 
 public class Calculator {
     private String[] tokens;
@@ -15,7 +15,7 @@ public class Calculator {
             if(token.isBlank())
                 continue;
             long num = Long.parseLong(token);
-            result = Validator.safeAdd(result, num);
+            result = Utility.safeAdd(result, num);
         }
         return result;
     }
