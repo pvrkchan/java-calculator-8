@@ -26,6 +26,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용X() {
+        assertSimpleTest(() -> {
+            run("//\\n1:2,4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    @Test
     void 일반_구분자_사용_여러숫자() {
         assertSimpleTest(() -> {
             run("123,5,6:7");

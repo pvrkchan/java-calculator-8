@@ -17,8 +17,9 @@ public class InputView {
     public static void validateCustomSeperator(String str){
         if(str.startsWith("//")){
             int index = str.indexOf("\\n");
-            if(index!=3)
+            if(index!=2 && index!=3)
                 throw new IllegalArgumentException("입력이 잘못되었습니다.");
+
         }
     }
 
