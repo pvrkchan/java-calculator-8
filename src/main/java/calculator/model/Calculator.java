@@ -1,22 +1,25 @@
 package calculator.model;
 
-import calculator.Utility;
-
 public class Calculator {
     private String[] tokens;
 
-    public Calculator(String[] tokens) {
-        this.tokens = tokens;
-    }
-
-    public long calculate() {
+    public long calculate(String input) {
+        Validator.validateCustomSeperator(input);
+        tokens = Parser.parsing(Parser.extractCustomSeperator(input));
+        Validator.validateNumber(tokens);
         long result = 0;
         for(String token : tokens) {
             if(token.isBlank())
                 continue;
             long num = Long.parseLong(token);
-            result = Utility.safeAdd(result, num);
+            result = safeAdd(result, num);
         }
         return result;
+    }
+
+    public static long safeAdd(long a, long b) {
+        if (a > (Long.MAX_VALUE - b))
+            throw new IllegalArgumentException("저장할 수 있는 수의 범위를 초과했습니다. 다시 입력해주세요.");
+        return a + b;
     }
 }
