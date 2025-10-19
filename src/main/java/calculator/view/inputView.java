@@ -18,8 +18,7 @@ public class InputView {
         if(str.startsWith("//")){
             int index = str.indexOf("\\n");
             if(index!=2 && index!=3)
-                throw new IllegalArgumentException("입력이 잘못되었습니다.");
-
+                throw new IllegalArgumentException("커스텀 문자의 입력이 잘못되었습니다.");
         }
     }
 
