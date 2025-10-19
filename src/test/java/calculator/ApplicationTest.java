@@ -42,6 +42,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 계산기_구분자_사이에_없는_경우() {
+        assertSimpleTest(() -> {
+            run(",,1,,2,3:4::");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 계산기_최대값_도출_입력(){
         assertSimpleTest(() -> {
             run("9223372036854775806,1");
