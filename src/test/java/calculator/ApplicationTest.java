@@ -42,6 +42,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 최대값_계산(){
+        assertSimpleTest(() -> {
+            run("9223372036854775806,1");
+            assertThat(output()).contains("결과 : 9223372036854775807");
+        });
+    }
+
+    @Test
     void 예외_커스텀_구분자_2글자() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//*^\\n1,23"))
@@ -70,6 +78,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//*\\n1,2.3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_오버플로우(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("9223372036854775807,1"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
