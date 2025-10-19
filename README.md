@@ -1,7 +1,5 @@
 # java-calculator-precourse
 
----
-
 ## ⚙️ 기능 구현 목록
 
 ### 1. 초기화단계
