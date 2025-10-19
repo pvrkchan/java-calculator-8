@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
     @Test
-    void 빈_문자열입력() {
+    void 계산기_빈_문자열_입력() {
         assertSimpleTest(() -> {
             run("\n");
             assertThat(output()).contains("결과 : 0");
@@ -18,7 +18,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_사용() {
+    void 계산기_커스텀_구분자_포함_문자열_입력() {
         assertSimpleTest(() -> {
             run("//;\\n1;2,3");
             assertThat(output()).contains("결과 : 6");
@@ -26,7 +26,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_사용X() {
+    void 계산기_커스텀_구분자_포함X_문자열_입력() {
         assertSimpleTest(() -> {
             run("//\\n1:2,4");
             assertThat(output()).contains("결과 : 7");
@@ -34,7 +34,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 일반_구분자_사용_여러숫자() {
+    void 계산기_디폴트_구분자_사용_여러_숫자_입력() {
         assertSimpleTest(() -> {
             run("123,5,6:7");
             assertThat(output()).contains("결과 : 141");
@@ -42,7 +42,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 최대값_계산(){
+    void 계산기_최대값_도출_입력(){
         assertSimpleTest(() -> {
             run("9223372036854775806,1");
             assertThat(output()).contains("결과 : 9223372036854775807");
@@ -50,7 +50,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_커스텀_구분자_2글자() {
+    void 계산기_커스텀_구분자_2글자_예외처리() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//*^\\n1,23"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -58,7 +58,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_음수() {
+    void 계산기_음수_포함_예외처리() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -66,7 +66,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_제로() {
+    void 계산기_제로_포함_예외처리() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("0,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -74,7 +74,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_등록되지_않은_구분자(){
+    void 계산기_등록되지_않은_구분자_예외처리(){
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//*\\n1,2.3"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -82,7 +82,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_오버플로우(){
+    void 계산기_계산결과_오버플로우_예외처리(){
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("9223372036854775807,1"))
                         .isInstanceOf(IllegalArgumentException.class)
