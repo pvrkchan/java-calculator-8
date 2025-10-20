@@ -45,7 +45,7 @@
 ---
 
 - [ ] view
-    - [ ] InputView : 사용자가 입력한 문자열을 Controlle에게 건네준다.
+    - [ ] InputView : 사용자가 입력한 문자열을 Controller에게 건네준다.
     - [ ] OutputView : 연산된 결과를 화면에 출력하는 역할을 수행한다.
 
 ---
