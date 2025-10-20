@@ -3,13 +3,13 @@ package calculator.model;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static final String seperatorRegex = ",|:";
+    private static final String DEFAULT_REGEX = ",|:";
 
     public static String getRegex(String str) {
         if(hasOneCustomSeperator(str)) {
-            return seperatorRegex + "|" + Pattern.quote(str.substring(2, 3));
+            return DEFAULT_REGEX + "|" + Pattern.quote(str.substring(2, 3));
         }
-        return seperatorRegex;
+        return DEFAULT_REGEX;
     }
 
     public static String getParsableString(String str) {
@@ -18,7 +18,7 @@ public class Parser {
         } else if(hasNoCustomSeperator(str)){
             return str.substring(4); // "//\n" 이후
         } else {
-            return str; // 기본 문자열
+            return str;
         }
     }
 
