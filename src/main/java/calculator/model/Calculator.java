@@ -1,12 +1,14 @@
 package calculator.model;
 
 public class Calculator {
-    private String[] tokens;
 
     public long calculate(String input) {
         Validator.validateCustomSeperator(input);
-        tokens = Parser.parsing(Parser.extractCustomSeperator(input));
+        String regex = Parser.getRegex(input);
+        String parsableString = Parser.getParsableString(input);
+        String[] tokens = Parser.parsing(parsableString, regex);
         Validator.validateNumber(tokens);
+
         long result = 0;
         for(String token : tokens) {
             if(token.isBlank())

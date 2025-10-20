@@ -3,21 +3,27 @@ package calculator.model;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static String seperatorRegex = ",|:";
+    private static final String seperatorRegex = ",|:";
 
-    public static String extractCustomSeperator(String str) {
+    public static String getRegex(String str) {
         if(hasOneCustomSeperator(str)) {
-            seperatorRegex += "|" + Pattern.quote(str.substring(2, 3));
-            return str.substring(5);
+            return seperatorRegex + "|" + Pattern.quote(str.substring(2, 3));
+        }
+        return seperatorRegex;
+    }
+
+    public static String getParsableString(String str) {
+        if(hasOneCustomSeperator(str)) {
+            return str.substring(5); // "//;\n" 이후
         } else if(hasNoCustomSeperator(str)){
-            return str.substring(4);
+            return str.substring(4); // "//\n" 이후
         } else {
-            return str;
+            return str; // 기본 문자열
         }
     }
 
-    public static String[] parsing(String str) {
-        return str.split(seperatorRegex);
+    public static String[] parsing(String str, String regex) {
+        return str.split(regex);
     }
 
     public static boolean hasOneCustomSeperator(String str) {
